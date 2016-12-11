@@ -1,0 +1,33 @@
+﻿$login-font: #403e3f;
+$global-font: #3977ad;
+
+.reader, .manager, .contributor, .admin {
+  position: fixed;
+  top: 6%;
+  left: 22%;
+}
+
+.reader {
+  table {
+    border-spacing: 30px 0;
+    text-align: left;
+
+    thead th {
+      border-bottom: 1px solid $login-font;
+    }
+  }
+
+  table td {
+    padding-bottom: 5px;
+  }
+
+  thead {
+    font: 16pt 'Roboto Slab', serif;
+    color: $login-font;
+  }
+
+  tbody a {
+    text-decoration: none;
+    color: $global-font;
+  }
+} 
