@@ -32,7 +32,6 @@ namespace Workflow_BL.DAL
 
         public T Read(int id)
         {
-            //return null;
             return Entity.FirstOrDefault(x=>x.ID == id);
         }
 

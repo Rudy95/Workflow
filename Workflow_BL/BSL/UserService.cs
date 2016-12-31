@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Workflow_BL.DAL;
 using Workflow_Models;
+using Workflow_Models.Models;
 
 namespace Workflow_BL.BL
 {

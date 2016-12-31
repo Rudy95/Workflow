@@ -1,7 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using Workflow_Models.Models;
 
-namespace Workflow_Models
+namespace Workflow_Models.Models
 {
     public class User:BaseClassId
     {
@@ -18,5 +19,10 @@ namespace Workflow_Models
 
         [Required]
         public string Password { get; set; }
+
+        [Required]
+        public Permission Permission { get; set; }
+
+        public List<UserLog> Logs { get; set; }
     }
 }

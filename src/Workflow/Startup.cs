@@ -12,10 +12,10 @@ using Microsoft.Extensions.Logging;
 using Workflow.Data;
 using Workflow.Models;
 using Workflow.Services;
-using Workflow_Models;
 
 using Microsoft.AspNetCore.Http;
 using React.AspNet;
+using Workflow_Models;
 
 namespace Workflow
 {
@@ -55,7 +55,6 @@ namespace Workflow
             // --------
             var connection = @"Server=(localdb)\mssqllocaldb;Database=Workflow;Trusted_Connection=True;";
             services.AddDbContext<DatabaseConfiguration>(options => options.UseSqlServer(connection, a=>a.MigrationsAssembly("Workflow")));
-
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
