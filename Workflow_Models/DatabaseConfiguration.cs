@@ -23,23 +23,8 @@ namespace Workflow_Models
 
         public virtual DbSet<MetaData> Metadata { get; set; }
 
-        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        //{
-        //    base.OnModelCreating(modelBuilder);
-        //    modelBuilder.Entity<User>()
-        //        .Property(e=>e.Email);
+        public virtual DbSet<Keyword> Keyword { get; set; }
 
-
-        //    modelBuilder.Entity<User>()
-        //        .Property(e => e.FirstName);
-
-
-        //    modelBuilder.Entity<User>()
-        //        .Property(e => e.LastName);
-
-
-        //    modelBuilder.Entity<User>()
-        //        .Property(e => e.Password);
-        //}
+        public virtual DbSet<Status> Status { get; set; }
     }
 }

@@ -2,7 +2,7 @@
 {
     public class Status:BaseClassId
     {
-        public string Stat { get; set; }
+        public DocumentStatus Stat { get; set; }
 
         public double VersionType { get; set; }
     }

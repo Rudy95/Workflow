@@ -5,16 +5,10 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Workflow.Migrations
 {
-    public partial class Second : Migration
+    public partial class First : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<int>(
-                name: "Permission",
-                table: "User",
-                nullable: false,
-                defaultValue: 0);
-
             migrationBuilder.CreateTable(
                 name: "Metadata",
                 columns: table => new
@@ -32,37 +26,34 @@ namespace Workflow.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Status",
+                name: "MyProperty",
                 columns: table => new
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Stat = table.Column<string>(nullable: true),
+                    Stat = table.Column<int>(nullable: false),
                     VersionType = table.Column<double>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Status", x => x.ID);
+                    table.PrimaryKey("PK_MyProperty", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserLog",
+                name: "User",
                 columns: table => new
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Date = table.Column<string>(nullable: false),
-                    UserId = table.Column<int>(nullable: false)
+                    Email = table.Column<string>(nullable: false),
+                    FirstName = table.Column<string>(nullable: false),
+                    LastName = table.Column<string>(nullable: false),
+                    Password = table.Column<string>(nullable: false),
+                    Permission = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserLog", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_UserLog_User_UserId",
-                        column: x => x.UserId,
-                        principalTable: "User",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                    table.PrimaryKey("PK_User", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -91,8 +82,8 @@ namespace Workflow.Migrations
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    FileName = table.Column<string>(nullable: true),
                     MetaDataID = table.Column<int>(nullable: true),
-                    MyProperty = table.Column<int>(nullable: false),
                     StatusID = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
@@ -105,11 +96,32 @@ namespace Workflow.Migrations
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Document_Status_StatusID",
+                        name: "FK_Document_MyProperty_StatusID",
                         column: x => x.StatusID,
-                        principalTable: "Status",
+                        principalTable: "MyProperty",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserLog",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Date = table.Column<string>(nullable: false),
+                    UserId = table.Column<int>(nullable: false),
+                    UserType = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserLog", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_UserLog_User_UserId",
+                        column: x => x.UserId,
+                        principalTable: "User",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -145,14 +157,13 @@ namespace Workflow.Migrations
                 name: "UserLog");
 
             migrationBuilder.DropTable(
-                name: "Status");
+                name: "MyProperty");
 
             migrationBuilder.DropTable(
                 name: "Metadata");
 
-            migrationBuilder.DropColumn(
-                name: "Permission",
-                table: "User");
+            migrationBuilder.DropTable(
+                name: "User");
         }
     }
 }

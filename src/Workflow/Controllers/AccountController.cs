@@ -14,6 +14,7 @@ using Workflow.Services;
 using System.Diagnostics;
 using Workflow_BL.BL;
 using Workflow_Models;
+using Workflow_Models.Models;
 
 namespace Workflow.Controllers
 {
@@ -47,19 +48,32 @@ namespace Workflow.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public IActionResult Login(LoginViewModel model)
+        public IActionResult Login(User model)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                var users = UserService.GetAllUsers(_context);
-                if(users.Single(x=>x.Email == model.Email)!=null)
-                    return RedirectToAction("Index", "Contributor");
+                UserService us = new UserService(_context);
+                var users = UserService.GetAllUsers();
+                if (!object.Equals(users.Single(x => x.Email == model.Email && x.Password == model.Password), default(User)))
+                    if (model.Permission == Permission.Contributor)
+                    {
+                        return RedirectToAction("Index", "Contributor");
+                    }
+                    else if (model.Permission == Permission.User)
+                    {
+                        return RedirectToAction("Index", "User");
+                    }
+                    else if (model.Permission == Permission.Manager)
+                    {
+                        return RedirectToAction("Index", "Manager");
+                    }
+                    else if (model.Permission == Permission.Admin)
+                    {
+                        return RedirectToAction("Index", "Admin");
+                    }
             }
-            //if (model.Email == "a@a.a" && model.Password == "a")
-            //{
-            //    return RedirectToAction("Index", "Contributor");
-            //}
             return View();
+
         }
 
         //
@@ -68,50 +82,8 @@ namespace Workflow.Controllers
         [AllowAnonymous]
         public IActionResult Login(string returnUrl = null)
         {
-            Debug.WriteLine("2");
             return View();
         }
-
-
-        //POST: /Account/Login
-        //[HttpPost]
-        //[AllowAnonymous]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
-        //{
-        //    //ViewData["ReturnUrl"] = returnUrl;
-        //    //if (ModelState.IsValid)
-        //    //{
-        //    //    // This doesn't count login failures towards account lockout
-        //    //    // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-        //    //    var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
-        //    //    if (result.Succeeded)
-        //    //    {
-        //    //        _logger.LogInformation(1, "User logged in.");
-        //    //        return RedirectToLocal(returnUrl);
-        //    //    }
-        //    //    if (result.RequiresTwoFactor)
-        //    //    {
-        //    //        return RedirectToAction(nameof(SendCode), new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-        //    //    }
-        //    //    if (result.IsLockedOut)
-        //    //    {
-        //    //        _logger.LogWarning(2, "User account locked out.");
-        //    //        return View("Lockout");
-        //    //    }
-        //    //    else
-        //    //    {
-        //    //        ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-        //    //        return View(model);
-        //    //    }
-        //    //}
-
-        //    if (model.Email == "a@a.a" && model.Password == "a")
-        //        return RedirectToAction("Index", "Home");
-
-        //    // If we got this far, something failed, redisplay form
-        //    return View(model);
-        //}
 
         //
         // GET: /Account/Register
@@ -128,26 +100,37 @@ namespace Workflow.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null)
+        public async Task<IActionResult> Register(User model, string returnUrl = null)
         {
-            ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = await _userManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
+                UserService service = new UserService(_context);
+                User user = UserService.GetAllUsers().SingleOrDefault(x=>x.Email == model.Email);
+
+                Debug.WriteLine("Valid");
+
+                if (EqualityComparer<User>.Default.Equals(user, default(User)))
                 {
-                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=532713
-                    // Send an email with this link
-                    //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    //var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
-                    //await _emailSender.SendEmailAsync(model.Email, "Confirm your account",
-                    //    $"Please confirm your account by clicking this link: <a href='{callbackUrl}'>link</a>");
-                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    Debug.WriteLine("Creating...");
+
+                    var u = new User
+                    {
+                        Email = model.Email,
+                        Password = model.Password,
+                        FirstName = model.FirstName,
+                        LastName = model.LastName,
+                        Permission = model.Permission,
+                    };
+
+                    UserService.AddUser(u);
+
                     _logger.LogInformation(3, "User created a new account with password.");
-                    return RedirectToLocal(returnUrl);
+                    return RedirectToAction("Login", "Account");
                 }
-                AddErrors(result);
+            }
+            else
+            {
+                _logger.LogInformation(3, "Model is not valid.");
             }
 
             // If we got this far, something failed, redisplay form

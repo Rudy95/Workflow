@@ -253,8 +253,10 @@ C:\Users\Nagy\documents\visual studio 2015\Projects\Workflow\src\Workflow\Data\A
 C:\Users\Nagy\documents\visual studio 2015\Projects\Workflow\src\Workflow\Data\Migrations\00000000000000_CreateIdentitySchema.cs
 C:\Users\Nagy\documents\visual studio 2015\Projects\Workflow\src\Workflow\Data\Migrations\00000000000000_CreateIdentitySchema.Designer.cs
 C:\Users\Nagy\documents\visual studio 2015\Projects\Workflow\src\Workflow\Data\Migrations\ApplicationDbContextModelSnapshot.cs
-C:\Users\Nagy\documents\visual studio 2015\Projects\Workflow\src\Workflow\Migrations\20161210121225_FirstMigration.cs
-C:\Users\Nagy\documents\visual studio 2015\Projects\Workflow\src\Workflow\Migrations\20161210121225_FirstMigration.Designer.cs
+C:\Users\Nagy\documents\visual studio 2015\Projects\Workflow\src\Workflow\Migrations\20170117084707_First.cs
+C:\Users\Nagy\documents\visual studio 2015\Projects\Workflow\src\Workflow\Migrations\20170117084707_First.Designer.cs
+C:\Users\Nagy\documents\visual studio 2015\Projects\Workflow\src\Workflow\Migrations\20170117085137_Second.cs
+C:\Users\Nagy\documents\visual studio 2015\Projects\Workflow\src\Workflow\Migrations\20170117085137_Second.Designer.cs
 C:\Users\Nagy\documents\visual studio 2015\Projects\Workflow\src\Workflow\Migrations\DatabaseConfigurationModelSnapshot.cs
 C:\Users\Nagy\documents\visual studio 2015\Projects\Workflow\src\Workflow\Models\ApplicationUser.cs
 C:\Users\Nagy\documents\visual studio 2015\Projects\Workflow\src\Workflow\Models\AccountViewModels\ExternalLoginConfirmationViewModel.cs

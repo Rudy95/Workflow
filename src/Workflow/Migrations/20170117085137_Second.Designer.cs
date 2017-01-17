@@ -9,7 +9,7 @@ using Workflow_Models.Models;
 namespace Workflow.Migrations
 {
     [DbContext(typeof(DatabaseConfiguration))]
-    [Migration("20161231135407_Second")]
+    [Migration("20170117085137_Second")]
     partial class Second
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,9 +23,9 @@ namespace Workflow.Migrations
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("MetaDataID");
+                    b.Property<string>("FileName");
 
-                    b.Property<int>("MyProperty");
+                    b.Property<int?>("MetaDataID");
 
                     b.Property<int?>("StatusID");
 
@@ -77,7 +77,7 @@ namespace Workflow.Migrations
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Stat");
+                    b.Property<int>("Stat");
 
                     b.Property<double>("VersionType");
 
@@ -119,6 +119,8 @@ namespace Workflow.Migrations
                         .IsRequired();
 
                     b.Property<int>("UserId");
+
+                    b.Property<int>("UserType");
 
                     b.HasKey("ID");
 

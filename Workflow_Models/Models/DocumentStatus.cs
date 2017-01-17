@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Workflow_Models.Models
 {
-    public enum Permission
+    public enum DocumentStatus
     {
-        Admin,
-        Manager,
-        Contributor,
-        User
+        DRAFT,
+        FINAL,
+        FINALREVIEWED,
+        BLOCKED
     }
 }

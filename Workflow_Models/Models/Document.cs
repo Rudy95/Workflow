@@ -8,11 +8,10 @@ namespace Workflow_Models.Models
 {
     public class Document:BaseClassId
     {
-        public int MyProperty { get; set; }
-
         public MetaData MetaData { get; set; }
 
         public Status Status{ get; set; }
 
+        public string FileName { get; set; }
     }
 }

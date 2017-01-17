@@ -14,6 +14,8 @@ namespace Workflow_Models.Models
 
         public int UserId { get; set; }
 
+        public Permission UserType { get; set; }
+
         public User User { get; set; }
     }
 }
