@@ -53,13 +53,13 @@ namespace Workflow.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public IActionResult Login(User model)
+        public async Task<IActionResult> Login(User model)
         {
             if (ModelState.IsValid)
             {
-                var user = UserService.GetAllUsers().Single(x => x.Email == model.Email);
-                if (!object.Equals(user, default(User)) 
-                    && user.Password == model.Password)
+                var result = await _signInManager.PasswordSignInAsync(model.Email, 
+                    model.Password, true, lockoutOnFailure: false);
+                if (result.Succeeded)
                 {
                     var date = new Date
                     {
@@ -71,9 +71,24 @@ namespace Workflow.Controllers
                         Second = DateTime.Now.Second
                     };
 
-                    UserService.AddUserLog(date, user.ID, user.Permission, user);
+                    var u = UserService.GetAllUsers().Single(x => x.Email == model.Email);
+
+                    UserService.AddUserLog(date, u.ID, u.Permission, u);
+
+                    _logger.LogInformation(1, "User logged in.");
                     return RedirectToAction("Index", "WorkZone");
                 }
+                if (result.IsLockedOut)
+                {
+                    _logger.LogWarning(2, "User account locked out.");
+                    return View("Lockout");
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    return View(model);
+                }
+
             }
             return View();
 
@@ -105,15 +120,22 @@ namespace Workflow.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(User model, string returnUrl = null)
         {
+            var Entity = ((DatabaseConfiguration)_context).User;
+            User a = UserService.GetAllUsers().Single(x=>x.Email == "rudy@gmail.com" && x.Password == "rudolf");
+            Entity.Remove(a);
             if (ModelState.IsValid)
             {
-                User user = UserService.GetAllUsers().SingleOrDefault(x=>x.Email == model.Email);
-
-                Debug.WriteLine("Valid");
-
-                if (EqualityComparer<User>.Default.Equals(user, default(User)))
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var result = await _userManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
                 {
-                    Debug.WriteLine("Creating...");
+                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=532713
+                    // Send an email with this link
+                    //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                    //var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
+                    //await _emailSender.SendEmailAsync(model.Email, "Confirm your account",
+                    //    $"Please confirm your account by clicking this link: <a href='{callbackUrl}'>link</a>");
+                    await _signInManager.SignInAsync(user, isPersistent: false);
 
                     var u = new User
                     {
@@ -126,9 +148,8 @@ namespace Workflow.Controllers
                     };
 
                     UserService.AddUser(u);
-
                     _logger.LogInformation(3, "User created a new account with password.");
-                    return RedirectToAction("Login", "Account");
+                    return RedirectToLocal(returnUrl);
                 }
             }
             else
