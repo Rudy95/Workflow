@@ -222,6 +222,7 @@
 --reference:C:\Users\Nagy\.nuget\packages\VroomJs\1.2.3\lib\net45\VroomJs.dll
 --reference:C:\Users\Nagy\documents\visual studio 2015\Projects\Workflow\Workflow_BL\bin\Debug\Workflow_BL.dll
 --reference:C:\Users\Nagy\documents\visual studio 2015\Projects\Workflow\Workflow_Models\bin\Debug\Workflow_Models.dll
+--reference:C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Web.Abstractions.dll
 --reference:C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\mscorlib.dll
 --reference:C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.dll
 --reference:C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Core.dll
@@ -242,13 +243,14 @@
 --reference:C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.IO.Compression.FileSystem.dll
 --reference:C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Numerics.dll
 --resource:"C:\Users\Nagy\documents\visual studio 2015\Projects\Workflow\src\Workflow\obj\Debug\net461\Workflowdotnet-compile.deps.json",Workflow.deps.json
+C:\Users\Nagy\documents\visual studio 2015\Projects\Workflow\src\Workflow\DocumentModel.cs
 C:\Users\Nagy\documents\visual studio 2015\Projects\Workflow\src\Workflow\Program.cs
 C:\Users\Nagy\documents\visual studio 2015\Projects\Workflow\src\Workflow\Startup.cs
 C:\Users\Nagy\documents\visual studio 2015\Projects\Workflow\src\Workflow\Controllers\AccountController.cs
-C:\Users\Nagy\documents\visual studio 2015\Projects\Workflow\src\Workflow\Controllers\AdminController.cs
-C:\Users\Nagy\documents\visual studio 2015\Projects\Workflow\src\Workflow\Controllers\ContributorController.cs
-C:\Users\Nagy\documents\visual studio 2015\Projects\Workflow\src\Workflow\Controllers\HomeController.cs
-C:\Users\Nagy\documents\visual studio 2015\Projects\Workflow\src\Workflow\Controllers\ManagerController.cs
+C:\Users\Nagy\documents\visual studio 2015\Projects\Workflow\src\Workflow\Controllers\FinalizedTasksController.cs
+C:\Users\Nagy\documents\visual studio 2015\Projects\Workflow\src\Workflow\Controllers\InitializedTasksController.cs
+C:\Users\Nagy\documents\visual studio 2015\Projects\Workflow\src\Workflow\Controllers\TasksController.cs
+C:\Users\Nagy\documents\visual studio 2015\Projects\Workflow\src\Workflow\Controllers\WorkZoneController.cs
 C:\Users\Nagy\documents\visual studio 2015\Projects\Workflow\src\Workflow\Data\ApplicationDbContext.cs
 C:\Users\Nagy\documents\visual studio 2015\Projects\Workflow\src\Workflow\Data\Migrations\00000000000000_CreateIdentitySchema.cs
 C:\Users\Nagy\documents\visual studio 2015\Projects\Workflow\src\Workflow\Data\Migrations\00000000000000_CreateIdentitySchema.Designer.cs
@@ -257,6 +259,8 @@ C:\Users\Nagy\documents\visual studio 2015\Projects\Workflow\src\Workflow\Migrat
 C:\Users\Nagy\documents\visual studio 2015\Projects\Workflow\src\Workflow\Migrations\20170117084707_First.Designer.cs
 C:\Users\Nagy\documents\visual studio 2015\Projects\Workflow\src\Workflow\Migrations\20170117085137_Second.cs
 C:\Users\Nagy\documents\visual studio 2015\Projects\Workflow\src\Workflow\Migrations\20170117085137_Second.Designer.cs
+C:\Users\Nagy\documents\visual studio 2015\Projects\Workflow\src\Workflow\Migrations\20170118131520_Third.cs
+C:\Users\Nagy\documents\visual studio 2015\Projects\Workflow\src\Workflow\Migrations\20170118131520_Third.Designer.cs
 C:\Users\Nagy\documents\visual studio 2015\Projects\Workflow\src\Workflow\Migrations\DatabaseConfigurationModelSnapshot.cs
 C:\Users\Nagy\documents\visual studio 2015\Projects\Workflow\src\Workflow\Models\ApplicationUser.cs
 C:\Users\Nagy\documents\visual studio 2015\Projects\Workflow\src\Workflow\Models\AccountViewModels\ExternalLoginConfirmationViewModel.cs

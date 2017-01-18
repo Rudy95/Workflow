@@ -8,7 +8,7 @@ using Workflow_Models.Models;
 
 namespace Workflow_BL.BSL
 {
-    class AdminService
+    public class AdminService
     {
         private static DatabaseConfiguration context;
 
@@ -36,7 +36,7 @@ namespace Workflow_BL.BSL
             return new UserLogRepository(context).GetLogByUserSimpleUser();
         }
 
-        public static IEnumerable<UserLog> GetLogsByInterval(string start, string end)
+        public static IEnumerable<UserLog> GetLogsByInterval(Date start,Date end)
         {
             return new UserLogRepository(context).GetLogByInterval(start, end);
         }

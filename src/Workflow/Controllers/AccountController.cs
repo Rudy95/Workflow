@@ -15,6 +15,7 @@ using System.Diagnostics;
 using Workflow_BL.BL;
 using Workflow_Models;
 using Workflow_Models.Models;
+using Workflow_BL.BSL;
 
 namespace Workflow.Controllers
 {
@@ -43,6 +44,10 @@ namespace Workflow.Controllers
             _smsSender = smsSender;
             _logger = loggerFactory.CreateLogger<AccountController>();
             _context = context;
+
+            new UserService(_context);
+            new AdminService(_context);
+            new ContributorService(_context);
         }
 
 
@@ -52,25 +57,23 @@ namespace Workflow.Controllers
         {
             if (ModelState.IsValid)
             {
-                UserService us = new UserService(_context);
-                var users = UserService.GetAllUsers();
-                if (!object.Equals(users.Single(x => x.Email == model.Email && x.Password == model.Password), default(User)))
-                    if (model.Permission == Permission.Contributor)
+                var user = UserService.GetAllUsers().Single(x => x.Email == model.Email);
+                if (!object.Equals(user, default(User)) 
+                    && user.Password == model.Password)
+                {
+                    var date = new Date
                     {
-                        return RedirectToAction("Index", "Contributor");
-                    }
-                    else if (model.Permission == Permission.User)
-                    {
-                        return RedirectToAction("Index", "User");
-                    }
-                    else if (model.Permission == Permission.Manager)
-                    {
-                        return RedirectToAction("Index", "Manager");
-                    }
-                    else if (model.Permission == Permission.Admin)
-                    {
-                        return RedirectToAction("Index", "Admin");
-                    }
+                        Year = DateTime.Now.Year,
+                        Month = DateTime.Now.Month,
+                        Day = DateTime.Now.Day,
+                        Hour = DateTime.Now.Hour,
+                        Minute = DateTime.Now.Minute,
+                        Second = DateTime.Now.Second
+                    };
+
+                    UserService.AddUserLog(date, user.ID, user.Permission, user);
+                    return RedirectToAction("Index", "WorkZone");
+                }
             }
             return View();
 
@@ -104,7 +107,6 @@ namespace Workflow.Controllers
         {
             if (ModelState.IsValid)
             {
-                UserService service = new UserService(_context);
                 User user = UserService.GetAllUsers().SingleOrDefault(x=>x.Email == model.Email);
 
                 Debug.WriteLine("Valid");
@@ -120,6 +122,7 @@ namespace Workflow.Controllers
                         FirstName = model.FirstName,
                         LastName = model.LastName,
                         Permission = model.Permission,
+                        Logs = new List<UserLog>()
                     };
 
                     UserService.AddUser(u);
@@ -145,7 +148,7 @@ namespace Workflow.Controllers
         {
             await _signInManager.SignOutAsync();
             _logger.LogInformation(4, "User logged out.");
-            return RedirectToAction(nameof(HomeController.Index), "Home");
+            return RedirectToAction(nameof(AccountController.Login), "Home");
         }
 
         //
@@ -470,7 +473,7 @@ namespace Workflow.Controllers
             }
             else
             {
-                return RedirectToAction(nameof(HomeController.Index), "Home");
+                return RedirectToAction(nameof(AccountController.Login), "Home");
             }
         }
 

@@ -39,10 +39,25 @@ namespace Workflow_BL.BSL
             return Entity.Where(x => x.UserType == Permission.User).ToList();
         }
 
-        internal IList<UserLog> GetLogByInterval(string start, string end)
+        internal void AddLog(UserLog log)
         {
-            return Entity.Where(x => x.Date.CompareTo(start.Reverse())>=0
-                && x.Date.CompareTo(end.Reverse())<0).ToList();
+            Create(log);
+            Context.SaveChanges();
+        }
+
+        internal IList<UserLog> GetLogByInterval(Date start, Date end)
+        {
+            return Entity.Where(x => x.Date.Year > start.Year 
+                && x.Date.Month > start.Month
+                && x.Date.Hour > start.Hour
+                && x.Date.Minute > start.Minute
+                && x.Date.Second > start.Second
+                && x.Date.Year < end.Year
+                && x.Date.Month < start.Month
+                && x.Date.Hour < start.Hour
+                && x.Date.Minute < start.Minute
+                && x.Date.Second < start.Second
+                ).ToList();
         }
     }
 }

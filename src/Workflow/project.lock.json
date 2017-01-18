@@ -8560,6 +8560,7 @@
       "microsoft.extensions.logging.console >= 1.1.0"
     ],
     ".NETFramework,Version=v4.6.1": [
+      "System.Web.Abstractions >= 4.0.0",
       "Workflow_BL",
       "Workflow_Models"
     ]

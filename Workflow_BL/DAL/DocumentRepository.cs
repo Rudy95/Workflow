@@ -34,5 +34,10 @@ namespace Workflow_BL.BSL
         {
             Entity.Remove(GetDocumentByName(name));
         }
+
+        internal IEnumerable<Document> GetAllDocuments()
+        {
+            return Entity.ToList();
+        }
     }
 }

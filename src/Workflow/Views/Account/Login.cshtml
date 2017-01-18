@@ -2,53 +2,64 @@
 @using Microsoft.AspNetCore.Http
 @using Microsoft.AspNetCore.Http.Authentication
 @model Workflow_Models.Models.User
-
 @{
     ViewData["Title"] = "Log in";
 }
 
 <h2>@ViewData["Title"].</h2>
 
-<div>
-    <div className="wrapper">
-        <div className="login">
-            <div className="flex-box">
-                @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                {
-                <div className="logo">
-                    <img src="http://i.imgur.com/6FHIXpn.png" />
-                </div>
+    <div>
 
-                <div>User Login</div>
+        @*@Html.React("Login", new
+       {
+           initialAnswers = Model,
+           url = Url.Action("Login"),
+       })*@
 
-                <div className="container">
-                    <div>
-                        @Html.LabelFor(e => e.Email)
-                    </div>
-                    <div>
-                        @Html.TextBoxFor(e => e.Email, new { @placeholder = "Email" })
-                    </div>
-                    <div>
-                        @Html.LabelFor(e => e.Password)
-                    </div>
-                    <div>
-                        @Html.PasswordFor(e => e.Password, new { @placeholder = "Password" })
+        <div className="wrapper">
+                <div className="login">
+                    <div className="flex-box">
+                        @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                        {
+                        <div className="logo">
+                            <img src="http://i.imgur.com/6FHIXpn.png" />
+                        </div>
+
+                        <div>User Login</div>
+
+                        <div className="container">
+                            <div>
+                                @Html.LabelFor(e => e.Email)
+                            </div>
+                            <div>
+                                @Html.TextBoxFor(e => e.Email, new { @placeholder = "Email" })
+                            </div>
+                            <div>
+                                @Html.LabelFor(e => e.Password)
+                            </div>
+                            <div>
+                                @Html.PasswordFor(e => e.Password, new { @placeholder = "Password" })
+                            </div>
+                        </div>
+
+                        <div className="container">
+                            <button type="submit" className="button" value="Post"> LOGIN</button>
+                        </div>
+                        }
                     </div>
                 </div>
-
-                <div className="container">
-                    <button type="submit" className="button" value="Post"> LOGIN</button>
-                </div>
-                }
             </div>
-        </div>
-    </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.2/react.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.2/react-dom.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/remarkable/1.7.1/remarkable.min.js"></script>
-    <script src="@Url.Content("~/js/LoginPage.jsx")"></script>
-</div>
+        <div>
+            @*<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.2/react.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.2/react-dom.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/remarkable/1.7.1/remarkable.min.js"></script>
+            <script src="@Url.Content("~/js/LoginPage.jsx")"></script>*@
+           @* @Html.ReactInitJavaScript()*@
+        </div>
+
+
+    </div>
 
 @section Scripts {
     @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Workflow_Models.Models
 {
-    public class Date
+    public class Date:BaseClassId
     {
         public int Year { get; set; }
 
@@ -17,5 +17,7 @@ namespace Workflow_Models.Models
         public int Hour { get; set; }
 
         public int Minute { get; set; }
+
+        public int Second { get; set; }
     }
 }

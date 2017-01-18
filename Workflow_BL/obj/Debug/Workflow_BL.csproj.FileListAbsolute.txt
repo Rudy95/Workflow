@@ -3,13 +3,6 @@ C:\Users\Nagy\documents\visual studio 2015\Projects\Workflow\Workflow_BL\bin\Deb
 C:\Users\Nagy\documents\visual studio 2015\Projects\Workflow\Workflow_BL\bin\Debug\Workflow_BL.pdb
 C:\Users\Nagy\documents\visual studio 2015\Projects\Workflow\Workflow_BL\bin\Debug\EntityFramework.dll
 C:\Users\Nagy\documents\visual studio 2015\Projects\Workflow\Workflow_BL\bin\Debug\EntityFramework.SqlServer.dll
-C:\Users\Nagy\documents\visual studio 2015\Projects\Workflow\Workflow_BL\bin\Debug\Workflow_Models.dll
-C:\Users\Nagy\documents\visual studio 2015\Projects\Workflow\Workflow_BL\bin\Debug\Workflow_Models.pdb
-C:\Users\Nagy\documents\visual studio 2015\Projects\Workflow\Workflow_BL\bin\Debug\EntityFramework.xml
-C:\Users\Nagy\documents\visual studio 2015\Projects\Workflow\Workflow_BL\bin\Debug\EntityFramework.SqlServer.xml
-C:\Users\Nagy\documents\visual studio 2015\Projects\Workflow\Workflow_BL\obj\Debug\Workflow_BL.csprojResolveAssemblyReference.cache
-C:\Users\Nagy\documents\visual studio 2015\Projects\Workflow\Workflow_BL\obj\Debug\Workflow_BL.dll
-C:\Users\Nagy\documents\visual studio 2015\Projects\Workflow\Workflow_BL\obj\Debug\Workflow_BL.pdb
 C:\Users\Nagy\documents\visual studio 2015\Projects\Workflow\Workflow_BL\bin\Debug\Microsoft.EntityFrameworkCore.dll
 C:\Users\Nagy\documents\visual studio 2015\Projects\Workflow\Workflow_BL\bin\Debug\Microsoft.Extensions.Caching.Abstractions.dll
 C:\Users\Nagy\documents\visual studio 2015\Projects\Workflow\Workflow_BL\bin\Debug\Microsoft.Extensions.Caching.Memory.dll
@@ -40,6 +33,10 @@ C:\Users\Nagy\documents\visual studio 2015\Projects\Workflow\Workflow_BL\bin\Deb
 C:\Users\Nagy\documents\visual studio 2015\Projects\Workflow\Workflow_BL\bin\Debug\System.Security.Cryptography.Primitives.dll
 C:\Users\Nagy\documents\visual studio 2015\Projects\Workflow\Workflow_BL\bin\Debug\System.Security.Cryptography.X509Certificates.dll
 C:\Users\Nagy\documents\visual studio 2015\Projects\Workflow\Workflow_BL\bin\Debug\System.Xml.ReaderWriter.dll
+C:\Users\Nagy\documents\visual studio 2015\Projects\Workflow\Workflow_BL\bin\Debug\Workflow_Models.dll
+C:\Users\Nagy\documents\visual studio 2015\Projects\Workflow\Workflow_BL\bin\Debug\Workflow_Models.pdb
+C:\Users\Nagy\documents\visual studio 2015\Projects\Workflow\Workflow_BL\bin\Debug\EntityFramework.xml
+C:\Users\Nagy\documents\visual studio 2015\Projects\Workflow\Workflow_BL\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\Nagy\documents\visual studio 2015\Projects\Workflow\Workflow_BL\bin\Debug\Microsoft.EntityFrameworkCore.xml
 C:\Users\Nagy\documents\visual studio 2015\Projects\Workflow\Workflow_BL\bin\Debug\Microsoft.Extensions.Caching.Abstractions.xml
 C:\Users\Nagy\documents\visual studio 2015\Projects\Workflow\Workflow_BL\bin\Debug\Microsoft.Extensions.Caching.Memory.xml
@@ -54,3 +51,6 @@ C:\Users\Nagy\documents\visual studio 2015\Projects\Workflow\Workflow_BL\bin\Deb
 C:\Users\Nagy\documents\visual studio 2015\Projects\Workflow\Workflow_BL\bin\Debug\System.Diagnostics.DiagnosticSource.xml
 C:\Users\Nagy\documents\visual studio 2015\Projects\Workflow\Workflow_BL\bin\Debug\System.Interactive.Async.xml
 C:\Users\Nagy\documents\visual studio 2015\Projects\Workflow\Workflow_BL\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\Nagy\documents\visual studio 2015\Projects\Workflow\Workflow_BL\obj\Debug\Workflow_BL.csprojResolveAssemblyReference.cache
+C:\Users\Nagy\documents\visual studio 2015\Projects\Workflow\Workflow_BL\obj\Debug\Workflow_BL.dll
+C:\Users\Nagy\documents\visual studio 2015\Projects\Workflow\Workflow_BL\obj\Debug\Workflow_BL.pdb

@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Workflow.Controllers
 {
-    public class ManagerController : Controller
+    public class TasksController : Controller
     {
         // GET: /<controller>/
         public IActionResult Index()

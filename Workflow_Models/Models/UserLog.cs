@@ -10,7 +10,7 @@ namespace Workflow_Models.Models
     public class UserLog:BaseClassId
     {
         [Required]
-        public string Date { get; set; }
+        public Date Date { get; set; }
 
         public int UserId { get; set; }
 

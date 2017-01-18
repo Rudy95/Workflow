@@ -13,5 +13,7 @@ namespace Workflow_Models.Models
         public Status Status{ get; set; }
 
         public string FileName { get; set; }
+
+        public string FileExtension { get; set; }
     }
 }
