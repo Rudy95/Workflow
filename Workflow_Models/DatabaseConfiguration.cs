@@ -26,5 +26,12 @@ namespace Workflow_Models
         public virtual DbSet<Keyword> Keyword { get; set; }
 
         public virtual DbSet<Status> Status { get; set; }
+
+        public virtual DbSet<Flux> Flux { get; set; }
+
+        public virtual DbSet<Department> Department { get; set; }
+
+        public virtual DbSet<Date> Date { get; set; }
+
     }
 }

@@ -37,10 +37,6 @@ namespace Workflow.Controllers
         // GET: /<controller>/
         public async Task<IActionResult> Index()
         {
-            var user = await GetCurrentUser();
-            Debug.WriteLine(user.Id);
-            Debug.WriteLine(user.Email);
-
             return View();
         }
         
@@ -53,11 +49,14 @@ namespace Workflow.Controllers
             {
                 // adding the document to a specific path
                 var upload = Path.Combine(_environment.WebRootPath, "documents");
-                var path = Path.Combine(upload, model.File.FileName);
+                var newFileName = Guid.NewGuid().ToString();
+                // the file will be stored with the name as guid.. the file name will be saved in db
+                var path = Path.Combine(upload, newFileName);
                 if (model.File.Length > 0)
                     using (var fileStream = new FileStream
-                        (Path.Combine(upload, model.File.FileName), FileMode.Create))
+                        (Path.Combine(upload, newFileName), FileMode.Create))
                     {
+                        // !!! check if the file is store with the guid name
                         await model.File.CopyToAsync(fileStream);
                     }
 
@@ -68,6 +67,8 @@ namespace Workflow.Controllers
                     keywords.Add(new Keyword {
                         Keywords = keywordsArray[i]
                     });
+
+                var userId = await GetCurrentUser();
 
                 var metadata = new MetaData
                 {
@@ -82,13 +83,12 @@ namespace Workflow.Controllers
                         Minute = DateTime.Now.Minute,
                         Second = DateTime.Now.Second
                     },
-                    //PersonId = int.Parse(User.Identity.GetUserId())
+                    PersonId = int.Parse(userId.Id)
                 };
 
                 if (!object.Equals(ContributorService.GetDocumentByName(model.File.FileName), default(Document)))
                 {
-                    ContributorService.ModifyDocument(model.File.FileName, model.File.FileName.Split('.')[1],
-                        metadata, path);
+                    ContributorService.ModifyDocument(model.File.FileName, metadata, path);
                 }
                 else
                 {
@@ -97,6 +97,28 @@ namespace Workflow.Controllers
                 }
             }
 
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult DeleteFile(int id)
+        {
+            ContributorService.DeleteDocument(id);
+            return View();
+
+        }
+
+        [HttpPost]
+        public IActionResult ChangeFileToFinal(int id)
+        {
+            ContributorService.DocumentToFinal(id);
+            return View();
+        }
+
+        [Route("Work/reload")]
+        [HttpPost]
+        public IActionResult Reload()
+        {
             return View();
         }
     }

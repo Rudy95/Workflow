@@ -25,14 +25,19 @@ namespace Workflow_BL.BSL
             Entity.Add(document);
         }
 
-        internal Document GetDocumentByName(string oldFileName)
+        internal IEnumerable<Document> GetDocumentByName(string name)
         {
-            return Entity.First(x=> x.FileName == oldFileName);
+            return Entity.Where(x=> x.FileName == name);
         }
 
-        internal void DeleteDocument(string name)
+        internal void DeleteDocument(int iD)
         {
-            Entity.Remove(GetDocumentByName(name));
+            Entity.Remove(GetDocumentByID(iD));
+        }
+
+        internal Document GetDocumentByID(int iD)
+        {
+            return Entity.First(x=>x.ID == iD);
         }
 
         internal IEnumerable<Document> GetAllDocuments()

@@ -9,9 +9,10 @@ using Workflow_Models.Models;
 namespace Workflow.Migrations
 {
     [DbContext(typeof(DatabaseConfiguration))]
-    partial class DatabaseConfigurationModelSnapshot : ModelSnapshot
+    [Migration("20170119174120_Flux")]
+    partial class Flux
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.0-rtm-22752")

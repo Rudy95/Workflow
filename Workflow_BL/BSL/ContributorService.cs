@@ -17,16 +17,11 @@ namespace Workflow_BL.BSL
             ContributorService.context = context;
         }
 
-        public static void AddDocument(string fileName, MetaData meta)
-        {
-            
-        }
-
-        public static Document GetDocumentByName(string fileName)
+        public static IEnumerable<Document> GetDocumentByName(string fileName)
         {
             try
             {
-                return GetAllDocuments().Single(x=>x.FileName==fileName);
+                return new DocumentRepository(context).GetDocumentByName(fileName) ;
             }
             catch
             {
@@ -39,29 +34,21 @@ namespace Workflow_BL.BSL
             return new DocumentRepository(context).GetAllDocuments();
         }
 
-        // TODO
-        public static void ModifyDocument(
-            int myProperty, string oldFileName,string newFileName, MetaData meta)
+        public static void ModifyDocument(string fileName, MetaData metaData, string path)
         {
-            //var repo = new DocumentRepository(context);
-            //Document doc = repo.GetDocumentByName(oldFileName);
-            //doc.MyProperty = myProperty;
-            //doc.MetaData = meta;
-            //doc.FileName = newFileName;
-            //doc.Status = new Status();
-            //doc.Status.Stat = DocumentStatus.DRAFT;
-            //doc.Status.VersionType += 0.1;
-            //repo.AddDocument(doc);
-        }
+            var repo = new DocumentRepository(context);
 
-        public static void DeleteDocument(string name)
-        {
-            new DocumentRepository(context).DeleteDocument(name);
-        }
+            double dd = repo.GetDocumentByName(fileName).Max(x => x.Status.VersionType);
+            Document doc = repo.GetDocumentByName(fileName)
+                .Single(x=>x.Status.VersionType == dd);
+            doc.MetaData = metaData;
+            if(doc.Status.Stat == DocumentStatus.DRAFT)
+                doc.Status.VersionType += 0.1;
+            else if (doc.Status.Stat == DocumentStatus.FINAL)
+                doc.Status.VersionType += 1.0;
+            doc.Path = path;
 
-        public static void ModifyDocument(string fileName, string fileExtension, MetaData metaData, string path)
-        {
-            throw new NotImplementedException();
+            repo.AddDocument(doc);
         }
 
         public static void AddDocument(string fileName, string fileExtension, MetaData metaData, string path)
@@ -75,9 +62,24 @@ namespace Workflow_BL.BSL
                     Stat = DocumentStatus.DRAFT,
                     VersionType = 0.1
                 },
+                Path = path
             };
             new DocumentRepository(context)
                 .AddDocument(doc);
+        }
+
+        public static void DeleteDocument(int id)
+        {
+            new DocumentRepository(context).DeleteDocument(id);
+        }
+
+        public static void DocumentToFinal(int id)
+        {
+            var repo = new DocumentRepository(context);
+            var doc = repo.GetDocumentByID(id);
+            doc.Status.Stat = DocumentStatus.FINAL;
+            doc.Status.VersionType = 1.0;
+            repo.AddDocument(doc);
         }
     }
 }

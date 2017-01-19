@@ -176,8 +176,11 @@
     <Compile Include="DatabaseConfiguration.cs" />
     <Compile Include="Models\BaseClassId.cs" />
     <Compile Include="Models\Date.cs" />
+    <Compile Include="Models\Department.cs" />
     <Compile Include="Models\Document.cs" />
     <Compile Include="Models\DocumentStatus.cs" />
+    <Compile Include="Models\Flux.cs" />
+    <Compile Include="Models\FluxAnswer.cs" />
     <Compile Include="Models\Keyword.cs" />
     <Compile Include="Models\MetaData.cs" />
     <Compile Include="Models\Permission.cs" />

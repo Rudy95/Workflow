@@ -15,5 +15,7 @@ namespace Workflow_Models.Models
         public string FileName { get; set; }
 
         public string FileExtension { get; set; }
+
+        public string Path { get; set; }
     }
 }
