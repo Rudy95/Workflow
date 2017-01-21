@@ -13,11 +13,20 @@ namespace Workflow_BL.BSL
     {
         private static DatabaseConfiguration context;
         private static DocumentRepository repo;
+        private static MetadataRepository meta;
+        private static StatusRepository stat;
+        private static KeywordRepository key; 
+        private static DateRepository date;
 
         public ContributorService(DatabaseConfiguration context)
         {
             ContributorService.context = context;
             repo = new DocumentRepository(ContributorService.context);
+
+            meta = new MetadataRepository(context);
+            stat = new StatusRepository(context);
+            key = new KeywordRepository(context);
+            date = new DateRepository(context);
         }
 
         public static IEnumerable<Document> GetDocumentByName(string fileName)
@@ -34,14 +43,25 @@ namespace Workflow_BL.BSL
 
         public static IEnumerable<Document> GetAllDocuments()
         {
-            return new DocumentRepository(ContributorService.context).GetAllDocuments();
+            var all = repo.GetAllDocuments();
+
+            foreach (var item in all)
+            {
+                item.MetaData = meta.Read(item.MetaDataId);
+                item.Status = stat.Read(item.StatusId);
+            }
+            return all;
         }
 
         public static void ModifyDocument(string fileName, MetaData metaData, string path)
         {
-            var repo = new DocumentRepository(context);
-
-            double dd = repo.GetDocumentByName(fileName).Max(x => x.Status.VersionType);
+            var docs = repo.GetDocumentByName(fileName);
+            foreach (var item in docs)
+            {
+                item.MetaData = meta.Read(item.MetaDataId);
+                item.Status = stat.Read(item.StatusId);
+            }
+            double dd = docs.Max(x => x.Status.VersionType);
             Document doc = repo.GetDocumentByName(fileName)
                 .Single(x=>x.Status.VersionType == dd);
             doc.MetaData = metaData;
@@ -56,15 +76,7 @@ namespace Workflow_BL.BSL
 
         public static IList<Document> GetAllDocumentsByUser(string name)
         {
-            var all = repo.GetAllDocuments();
-            var meta = new MetadataRepository(context);
-            var stat = new StatusRepository(context);
-            foreach (var item in all)
-            {
-                item.MetaData = meta.Read(item.MetaDataId);
-                item.Status = stat.Read(item.StatusId);
-            }
-            return repo.GetAllDocuments().Where(x=>x.MetaData.UserEmail == name).ToList();
+            return GetAllDocuments().Where(x=>x.MetaData.UserEmail == name).ToList();
         }
 
         public static void AddDocument(string fileName, string fileExtension, MetaData metaData, string path)
@@ -80,19 +92,20 @@ namespace Workflow_BL.BSL
                 },
                 Path = path
             };
-            new DocumentRepository(context)
-                .AddDocument(doc);
+            repo.AddDocument(doc);
         }
 
         public static void DeleteDocument(int id)
         {
-            new DocumentRepository(context).DeleteDocument(id);
+            repo.DeleteDocument(id);
         }
 
         public static void DocumentToFinal(int id)
         {
-            var repo = new DocumentRepository(context);
             var doc = repo.GetDocumentByID(id);
+            doc.MetaData = meta.Read(doc.MetaDataId);
+            doc.MetaData.Keywords = key.GetAllKeywords().Where(x=>x.MetaDataID == doc.MetaDataId).ToList();
+            doc.Status = stat.Read(doc.StatusId);
             doc.Status.Stat = DocumentStatus.FINAL;
             doc.Status.VersionType = 1.0;
             repo.AddDocument(doc);

@@ -22,7 +22,8 @@ namespace Workflow_BL.BSL
 
         internal void AddDocument(Document document)
         {
-            Create(document);
+            var a = Create(document);
+            Context.Attach(a);
             Context.SaveChanges();
         }
 

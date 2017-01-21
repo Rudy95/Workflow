@@ -112,15 +112,15 @@ namespace Workflow.Controllers
         public IActionResult DeleteFile(int id)
         {
             ContributorService.DeleteDocument(id);
-            return View();
-
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
         public IActionResult ChangeFileToFinal(int id)
         {
             ContributorService.DocumentToFinal(id);
-            return View();
+            return RedirectToAction("Index");
+
         }
 
         [Route("Work/reload")]

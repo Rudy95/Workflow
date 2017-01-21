@@ -6,33 +6,31 @@
 @{
 }
 
-@foreach(var doc in Model)
+@foreach (var doc in Model)
 {
-    <li>@doc.FileName   -    @doc.Status.Stat    -   @doc.Status.VersionType</li>
-        @if (@doc.Status.Stat.ToString() == "FINAL")
-        {
-        <button>Set to draft</button>
-        }
-        <button>Set to final</button>
-        <button>Delete file</button>
+        <li>@doc.FileName   -    @doc.Status.Stat    -   @doc.Status.VersionType</li>
+        <form method="post">
+            <input type="hidden" name ="id" value="@doc.ID"/>
 
+            <button asp-action="Preview" asp-controller="WorkZone">Preview</button>
+
+            @if (@doc.Status.Stat.ToString() == "FINAL")
+            {
+                <button asp-action="SetToDraft" asp-controller="WorkZone">Set to draft</button>
+            }
+            <button asp-action="ChangeFileToFinal" asp-controller="WorkZone">Set to final</button>
+            <button asp-action="DeleteFile" asp-controller="WorkZone">Delete file</button>
+        </form>
 
 }
 
 
 <form method="post" asp-action="AddFile" asp-controller="WorkZone" enctype="multipart/form-data">
 
-
-    <div>
-        <label>Keywords</label>
-    </div>
-    <div>
-        <label>Other</label>
-    </div>
-
-    
     <input type="file" name="files" multiple />
+    <label>Other</label>
     <textarea name="abs"></textarea>
+    <label>Keywords</label>
     <textarea name="key"></textarea>
     <div>
         <input type="submit" value="Upload" />

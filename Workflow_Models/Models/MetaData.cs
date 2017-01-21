@@ -10,6 +10,8 @@ namespace Workflow_Models.Models
 
         public Date Created { get; set; }
 
+        public int CreatedId { get; set; }
+
         public List<Keyword> Keywords { get; set; }
     }
 }

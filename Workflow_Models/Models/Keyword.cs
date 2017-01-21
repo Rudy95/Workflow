@@ -9,5 +9,7 @@ namespace Workflow_Models.Models
     public class Keyword:BaseClassId
     {
         public string Keywords { get; set; }
+
+        public int MetaDataID { get; set; }
     }
 }

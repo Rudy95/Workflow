@@ -9,9 +9,10 @@ using Workflow_Models.Models;
 namespace Workflow.Migrations
 {
     [DbContext(typeof(DatabaseConfiguration))]
-    partial class DatabaseConfigurationModelSnapshot : ModelSnapshot
+    [Migration("20170121113503_tinymodif")]
+    partial class tinymodif
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.0-rtm-22752")
@@ -20,8 +21,7 @@ namespace Workflow.Migrations
             modelBuilder.Entity("Workflow_Models.Models.Date", b =>
                 {
                     b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int>("Day");
 
@@ -43,8 +43,7 @@ namespace Workflow.Migrations
             modelBuilder.Entity("Workflow_Models.Models.Department", b =>
                 {
                     b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int?>("FluxID");
 
@@ -64,8 +63,7 @@ namespace Workflow.Migrations
             modelBuilder.Entity("Workflow_Models.Models.Document", b =>
                 {
                     b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("FileExtension");
 
@@ -93,10 +91,7 @@ namespace Workflow.Migrations
             modelBuilder.Entity("Workflow_Models.Models.Flux", b =>
                 {
                     b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name");
+                        .ValueGeneratedOnAdd();
 
                     b.HasKey("ID");
 
@@ -106,8 +101,7 @@ namespace Workflow.Migrations
             modelBuilder.Entity("Workflow_Models.Models.Keyword", b =>
                 {
                     b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Keywords");
 
@@ -123,8 +117,7 @@ namespace Workflow.Migrations
             modelBuilder.Entity("Workflow_Models.Models.MetaData", b =>
                 {
                     b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Abstract");
 
@@ -142,8 +135,7 @@ namespace Workflow.Migrations
             modelBuilder.Entity("Workflow_Models.Models.Status", b =>
                 {
                     b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int>("Stat");
 
@@ -157,8 +149,7 @@ namespace Workflow.Migrations
             modelBuilder.Entity("Workflow_Models.Models.User", b =>
                 {
                     b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Email")
                         .IsRequired();
@@ -181,8 +172,7 @@ namespace Workflow.Migrations
             modelBuilder.Entity("Workflow_Models.Models.UserLog", b =>
                 {
                     b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int>("DateID");
 

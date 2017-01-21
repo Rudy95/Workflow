@@ -8,6 +8,8 @@ namespace Workflow_Models.Models
 {
     public class Flux:BaseClassId
     {
+        public string Name{ get; set; }
+
         public List<Document> Documents { get; set; }
 
         public List<Department> Departments { get; set; }
