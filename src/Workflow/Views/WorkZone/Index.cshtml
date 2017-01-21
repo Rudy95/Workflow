@@ -1,14 +1,50 @@
-﻿@*
+﻿@model List<Workflow_Models.Models.Document>
+
+@*
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
 }
 
+@foreach(var doc in Model)
+{
+    <li>@doc.FileName   -    @doc.Status.Stat    -   @doc.Status.VersionType</li>
+        @if (@doc.Status.Stat.ToString() == "FINAL")
+        {
+        <button>Set to draft</button>
+        }
+        <button>Set to final</button>
+        <button>Delete file</button>
+
+
+}
+
+
+<form method="post" asp-action="AddFile" asp-controller="WorkZone" enctype="multipart/form-data">
+
+
+    <div>
+        <label>Keywords</label>
+    </div>
+    <div>
+        <label>Other</label>
+    </div>
+
+    
+    <input type="file" name="files" multiple />
+    <textarea name="abs"></textarea>
+    <textarea name="key"></textarea>
+    <div>
+        <input type="submit" value="Upload" />
+    </div>
+</form>
+@Model.Capacity
 @Html.React("Work", new
 {
-    initialAnswers = Model,
+    intitialData = @Model,
+    name = @Model.Capacity,
     url = Url.Action("Work"),
-    submitUrl = Url.Action("Reload"),
+    submitUrl = Url.Action("AddFile"),
     pollInterval = 2000,
 })
 

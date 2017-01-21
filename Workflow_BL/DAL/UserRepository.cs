@@ -30,7 +30,8 @@ namespace Workflow_BL.DAL
 
         public IList<User> GetAllUsers()
         {
-            return Entity.ToList();
+            var v= Entity.ToList();
+            return v;
         }
 
         public void AddUser(User user)

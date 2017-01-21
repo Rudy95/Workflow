@@ -8,6 +8,10 @@ namespace Workflow_Models.Models
 {
     public class Document:BaseClassId
     {
+        public int MetaDataId { get; set; }
+
+        public int StatusId { get; set; }
+
         public MetaData MetaData { get; set; }
 
         public Status Status{ get; set; }

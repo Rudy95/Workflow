@@ -13,20 +13,22 @@ namespace Workflow_BL.BL
     public class UserService
     {
         private static DatabaseConfiguration context;
+        private static UserRepository repo;
 
         public UserService(DatabaseConfiguration context)
         {
             UserService.context = context;
+            repo = new UserRepository(context);
         }
 
         public static IEnumerable<User> GetAllUsers()
         {
-            return new UserRepository(context).GetAllUsers();
+            return repo.GetAllUsers();
         }
 
         public static void AddUser(User user)
         {
-            new UserRepository(context).AddUser(user);
+            repo.AddUser(user);
         }
 
         public static void AddUserLog(Date date, int iD, Permission permission, User user)

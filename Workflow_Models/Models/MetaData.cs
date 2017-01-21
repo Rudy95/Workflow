@@ -6,7 +6,7 @@ namespace Workflow_Models.Models
     {
         public string Abstract { get; set; }
 
-        public int PersonId { get; set; }
+        public string UserEmail { get; set; }
 
         public Date Created { get; set; }
 

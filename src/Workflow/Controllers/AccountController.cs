@@ -120,9 +120,6 @@ namespace Workflow.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(User model, string returnUrl = null)
         {
-            var Entity = ((DatabaseConfiguration)_context).User;
-            User a = UserService.GetAllUsers().Single(x=>x.Email == "rudy@gmail.com" && x.Password == "rudolf");
-            Entity.Remove(a);
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };

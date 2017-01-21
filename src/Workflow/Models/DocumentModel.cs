@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Workflow_Models.Models;
 
-namespace Workflow.Controllers
+namespace Workflow.Models
 {
     public class DocumentModel
     {

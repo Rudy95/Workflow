@@ -9,9 +9,10 @@ using Workflow_Models.Models;
 namespace Workflow.Migrations
 {
     [DbContext(typeof(DatabaseConfiguration))]
-    partial class DatabaseConfigurationModelSnapshot : ModelSnapshot
+    [Migration("20170120220204_fckstring")]
+    partial class fckstring
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.0-rtm-22752")

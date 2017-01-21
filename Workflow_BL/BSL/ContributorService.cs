@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Workflow_BL.DAL;
 using Workflow_Models;
 using Workflow_Models.Models;
 
@@ -11,17 +12,19 @@ namespace Workflow_BL.BSL
     public class ContributorService
     {
         private static DatabaseConfiguration context;
+        private static DocumentRepository repo;
 
         public ContributorService(DatabaseConfiguration context)
         {
             ContributorService.context = context;
+            repo = new DocumentRepository(ContributorService.context);
         }
 
         public static IEnumerable<Document> GetDocumentByName(string fileName)
         {
             try
             {
-                return new DocumentRepository(context).GetDocumentByName(fileName) ;
+                return repo.GetDocumentByName(fileName) ;
             }
             catch
             {
@@ -31,7 +34,7 @@ namespace Workflow_BL.BSL
 
         public static IEnumerable<Document> GetAllDocuments()
         {
-            return new DocumentRepository(context).GetAllDocuments();
+            return new DocumentRepository(ContributorService.context).GetAllDocuments();
         }
 
         public static void ModifyDocument(string fileName, MetaData metaData, string path)
@@ -49,6 +52,19 @@ namespace Workflow_BL.BSL
             doc.Path = path;
 
             repo.AddDocument(doc);
+        }
+
+        public static IList<Document> GetAllDocumentsByUser(string name)
+        {
+            var all = repo.GetAllDocuments();
+            var meta = new MetadataRepository(context);
+            var stat = new StatusRepository(context);
+            foreach (var item in all)
+            {
+                item.MetaData = meta.Read(item.MetaDataId);
+                item.Status = stat.Read(item.StatusId);
+            }
+            return repo.GetAllDocuments().Where(x=>x.MetaData.UserEmail == name).ToList();
         }
 
         public static void AddDocument(string fileName, string fileExtension, MetaData metaData, string path)

@@ -12,7 +12,7 @@ namespace Workflow_BL.BSL
 
         public DocumentRepository(DatabaseConfiguration context):base(context)
         {
-            Entity = ((DatabaseConfiguration)context).Document;
+            Entity = (context).Document;
         }
 
         internal IList<Document> GetDocumentsByKeyword(string keyword)
@@ -22,7 +22,8 @@ namespace Workflow_BL.BSL
 
         internal void AddDocument(Document document)
         {
-            Entity.Add(document);
+            Create(document);
+            Context.SaveChanges();
         }
 
         internal IEnumerable<Document> GetDocumentByName(string name)
@@ -40,9 +41,10 @@ namespace Workflow_BL.BSL
             return Entity.First(x=>x.ID == iD);
         }
 
-        internal IEnumerable<Document> GetAllDocuments()
+        internal IList<Document> GetAllDocuments()
         {
             return Entity.ToList();
         }
+
     }
 }
