@@ -30,14 +30,18 @@ namespace Workflow_BL.DAL
 
         public IList<User> GetAllUsers()
         {
-            var v= Entity.ToList();
-            return v;
+            return Entity.ToList();
         }
 
         public void AddUser(User user)
         {
             Create(user);
             Context.SaveChanges();
+        }
+
+        internal User GetUserByEmail(string name)
+        {
+            return Entity.FirstOrDefault(x=>x.Email==name);
         }
     }
 }

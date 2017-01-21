@@ -175,6 +175,7 @@
     <Compile Include="BSL\ContributorService.cs" />
     <Compile Include="DAL\DateRepository.cs" />
     <Compile Include="DAL\DocumentRepository.cs" />
+    <Compile Include="DAL\FluxRepository.cs" />
     <Compile Include="DAL\KeywordRepository.cs" />
     <Compile Include="DAL\MetadataRepository.cs" />
     <Compile Include="DAL\StatusRepository.cs" />

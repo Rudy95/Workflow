@@ -100,15 +100,33 @@ namespace Workflow_BL.BSL
             repo.DeleteDocument(id);
         }
 
-        public static void DocumentToFinal(int id)
+        public static void DocumentToFinal(int id, string path)
         {
+            var newDoc = new Document();
             var doc = repo.GetDocumentByID(id);
-            doc.MetaData = meta.Read(doc.MetaDataId);
-            doc.MetaData.Keywords = key.GetAllKeywords().Where(x=>x.MetaDataID == doc.MetaDataId).ToList();
-            doc.Status = stat.Read(doc.StatusId);
-            doc.Status.Stat = DocumentStatus.FINAL;
-            doc.Status.VersionType = 1.0;
-            repo.AddDocument(doc);
+            newDoc.FileName = doc.FileName;
+            newDoc.FileExtension = doc.FileExtension;
+            newDoc.Path = path;
+            newDoc.MetaData = meta.Read(doc.MetaDataId);
+            newDoc.MetaData.Keywords = key.GetAllKeywords().Where(x=>x.MetaDataID == doc.MetaDataId).ToList();
+            newDoc.Status = stat.Read(doc.StatusId);
+            newDoc.Status.Stat = DocumentStatus.FINAL;
+            newDoc.Status.VersionType = 1.0;
+            repo.AddDocument(newDoc);
+        }
+
+        public static Document GetDocumentByID(int id)
+        {
+            return repo.GetDocumentByID(id);
+        }
+
+        public static void CreateFlux(string type, List<Document> docs, List<Department> dep)
+        {
+            Flux flux = new Flux();
+            flux.Name = type;
+            flux.Documents = docs;
+            flux.Departments = dep;
+            new FluxRepository(context).AddFlux(flux);
         }
     }
 }

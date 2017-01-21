@@ -31,6 +31,7 @@ namespace Workflow.Controllers
             _manager = manager;
             _context = context;
             new ContributorService(_context);
+            new AdminService(_context);
         }
 
         private async Task<ApplicationUser> GetCurrentUser()
@@ -118,16 +119,56 @@ namespace Workflow.Controllers
         [HttpPost]
         public IActionResult ChangeFileToFinal(int id)
         {
-            ContributorService.DocumentToFinal(id);
+            var upload = Path.Combine(_environment.WebRootPath, "documents");
+            var newFileName = Guid.NewGuid().ToString() + ".pdf";
+            // the file will be stored with the name as guid.. the file name will be saved in db
+            var path = Path.Combine(upload, newFileName);
+
+            ContributorService.DocumentToFinal(id, path);
             return RedirectToAction("Index");
 
         }
 
-        [Route("Work/reload")]
         [HttpPost]
-        public IActionResult Reload()
+        public IActionResult Preview(int id)
         {
-            return View();
+            Document doc = ContributorService.GetDocumentByID(id);
+
+            var ms = new FileStream(doc.Path, FileMode.Open);
+            try
+            {
+                ms.Position = 0;
+                return File(ms, "application/pdf", "File.pdf");
+            }
+            catch
+            {
+                ms.Dispose();
+                throw;
+            }
+        }
+
+        [HttpPost]
+        public IActionResult StartFlux(string listIds)
+        {
+             if (ModelState.IsValid)
+             {
+                string[] ids = listIds.Trim().Split(' ');
+                List<Document> docs = new List<Document>();
+                for (int i = 0; i < ids.Length; i++)
+                {
+                    docs.Add(ContributorService.GetDocumentByID(int.Parse(ids[i])));
+                }
+
+                List<Department> dep = new List<Department>();
+                string type = "";
+                Department d1 = new Department();
+                d1.Name = "decanat";
+                d1.User = AdminService.GetUserByEmail(User.Identity.Name);
+                dep.Add(d1);
+                ContributorService.CreateFlux(type, docs, dep);
+
+             }
+             return RedirectToAction("Index");
         }
     }
 }

@@ -6,24 +6,63 @@
 @{
 }
 
-@foreach (var doc in Model)
-{
-        <li>@doc.FileName   -    @doc.Status.Stat    -   @doc.Status.VersionType</li>
-        <form method="post">
-            <input type="hidden" name ="id" value="@doc.ID"/>
+<script>
+    //function getIDs() {
+    //    var el = document.getElementsByName("ids").val();
+    //    document.getElementById("label").innerHTML = "sadyagsd";
+    //}
+    //$(document).ready(function () {
+    //}
+    //         )
 
+    function getIDs() {
+        ids = "";
+        el = document.getElementsByClassName("ids");
+        for (var i = 0; i < el.length; i++) {
+            if(el[i].checked == true)
+                ids += el[i].value + " ";
+
+        }
+        document.getElementById("label").innerHTML = ids;
+    }
+</script>
+
+    @foreach (var doc in Model)
+    {
+        <li>@doc.FileName   -    @doc.Status.Stat    -   @doc.Status.VersionType </li>
+        <form method="post">
+            
+            <input type="hidden" name="id" value="@doc.ID" />
+
+            
+            @if (@doc.Status.Stat.ToString() == "FINAL")
+            {
+                <label>
+                    Add to flux<input type="checkbox" class ="ids" value="@doc.ID" />
+                </label>
+            }
             <button asp-action="Preview" asp-controller="WorkZone">Preview</button>
 
-            @if (@doc.Status.Stat.ToString() == "FINAL")
+            @if (@doc.Status.Stat.ToString() == "DRAFT")
             {
                 <button asp-action="SetToDraft" asp-controller="WorkZone">Set to draft</button>
             }
-            <button asp-action="ChangeFileToFinal" asp-controller="WorkZone">Set to final</button>
+            else if (@doc.Status.Stat.ToString() == "FINAL")
+            {
+                <button asp-action="ChangeFileToFinal" asp-controller="WorkZone">Set to final</button>
+            }
             <button asp-action="DeleteFile" asp-controller="WorkZone">Delete file</button>
+
         </form>
 
-}
+    }
 
+
+<form method="post">
+    <textarea id="label" name="listIds" hidden></textarea>
+    
+    <button asp-action="StartFlux" asp-controller="WorkZone" onclick="getIDs()">Start flux</button>
+</form>
 
 <form method="post" asp-action="AddFile" asp-controller="WorkZone" enctype="multipart/form-data">
 
@@ -36,7 +75,8 @@
         <input type="submit" value="Upload" />
     </div>
 </form>
-@Model.Capacity
+
+@*@Model.Capacity
 @Html.React("Work", new
 {
     intitialData = @Model,
@@ -44,7 +84,7 @@
     url = Url.Action("Work"),
     submitUrl = Url.Action("AddFile"),
     pollInterval = 2000,
-})
+})*@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.2/react.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.2/react-dom.js"></script>

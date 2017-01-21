@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Workflow_BL.DAL;
 using Workflow_Models;
 using Workflow_Models.Models;
 
@@ -44,6 +45,11 @@ namespace Workflow_BL.BSL
         public static IEnumerable<Document> GetDocumentsByKeyword(string keyword)
         {
             return new DocumentRepository(context).GetDocumentsByKeyword(keyword);
+        }
+
+        public static User GetUserByEmail(string name)
+        {
+            return new UserRepository(context).GetUserByEmail(name);
         }
     }
 }

@@ -22,8 +22,7 @@ namespace Workflow_BL.BSL
 
         internal void AddDocument(Document document)
         {
-            var a = Create(document);
-            Context.Attach(a);
+            Create(document);
             Context.SaveChanges();
         }
 
@@ -34,7 +33,8 @@ namespace Workflow_BL.BSL
 
         internal void DeleteDocument(int iD)
         {
-            Entity.Remove(GetDocumentByID(iD));
+            Delete(GetDocumentByID(iD));
+            Context.SaveChanges();
         }
 
         internal Document GetDocumentByID(int iD)
