@@ -1,0 +1,188 @@
+body {
+  font-family: Roboto, sans-serif;
+  background-color: #f8f8f8;
+  margin: 0;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0 0 0 20px;
+  margin: 0;
+}
+
+.wrapper {
+  width: 800px;
+  margin: 0 auto;
+}
+
+/* LOGIN PAGE */
+
+.login {
+  width: 300px;
+  height: 350px;
+  background-color: #c0bebe;
+
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  margin: auto;
+
+  border-radius: 10px;
+}
+
+.login .logo-img img {
+  margin-top: -200px;
+  height: 150px;
+}
+
+.login form {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  width: 300px;
+  height: 350px;
+}
+
+.login form div {
+  font-size: 20pt;
+  font-weight: 500;
+  color: #403e3f;
+}
+
+.login .container a {
+  font-size: 12pt;
+  text-decoration: none;
+  background-color: #2bb3ff;
+  color: white;
+  padding: 7px 20px;
+  margin: 10px auto;
+  border: none;
+  cursor: pointer;
+  width: 100px;
+  border-radius: 5px;
+  border-bottom: 3px solid #00a4ff
+}
+
+.login input[type=text], input[type=password] {
+  width: 70%;
+  padding: 12px;
+  margin: 3px auto;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  border-radius: 3px;
+}
+
+.login input[type=password] {
+  margin-bottom: 10px;
+}
+
+.btn a {
+  text-decoration: none;
+  background-color: #2bb3ff;
+  color: white;
+  padding: 10px 20px;
+  margin: 10px auto;
+  border: none;
+  cursor: pointer;
+  width: 70%;
+  border-radius: 5px;
+  border-bottom: 3px solid #00a4ff
+}
+
+/* HEADER */
+
+.header {
+  width: 100%;
+  margin: 0 auto;
+  display: inline;
+  position: fixed;
+  z-index: 1;
+  background-color: #eeeeee;
+  padding: 10px 0;
+  border-bottom: 1px solid #bebebe;
+}
+
+.logo {
+  float: left;
+  width: 30%;
+}
+
+.logOut {
+  float: left;
+  width: 20%;
+}
+
+.taskMenu {
+  float: left;
+  width: 50%;
+}
+
+.logo a {
+  font-family: 'Roboto Slab', serif;
+  font-size: 16pt;
+  font-weight: bold;
+  letter-spacing: -1px;
+  text-decoration: none;
+  color: #3878b1;
+  padding: 10px 0 0 -10px;
+  margin-left: 10px;
+}
+
+.taskMenu ul li{
+  display: inline;
+  margin: 10px;
+  text-align: center;
+}
+
+.taskMenu ul li a {
+  text-decoration: none;
+  color: #3878b1;
+}
+
+.logOut a {
+  font-family: 'Roboto Slab', serif;
+  font-size: 16pt;
+  font-weight: bold;
+  letter-spacing: -1px;
+  text-decoration: none;
+  color: #3878b1;
+  padding: 10px 10px 0 -10px;
+  margin-right: 10px;
+  float: right;
+}
+
+/* SIDEBAR */
+
+.sidebar {
+  width: 20%;
+  height: 94%;
+  bottom: 0;
+  position: fixed;
+  background-color: lightgrey;
+  padding: 10px 0 0 10px;
+}
+
+.sidebar hr {
+  width: 80%;
+}
+
+.sidebar ul {
+  overflow: auto;
+  padding: 0;
+}
+
+.sidebar li a {
+  display: block;
+  color: #3977ad;
+  text-decoration: none;
+  font-size: 14pt;
+}
+
+.sidebar li a:hover {
+  background-color: #2bb3ff;
+  color: white;
+}
