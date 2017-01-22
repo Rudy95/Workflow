@@ -1,0 +1,75 @@
+.login {
+  width: 300px;
+  height: 350px;
+  background-color: $login-bg;
+
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  margin: auto;
+
+  border-radius: 10px;
+}
+
+.login .logo-img img {
+  margin-top: -200px;
+  height: 150px;
+}
+
+.login form {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  width: 300px;
+  height: 350px;
+}
+
+.login form div {
+  font-size: 20pt;
+  font-weight: 500;
+  color: $login-font;
+}
+
+.login .container a {
+  font-size: 12pt;
+  text-decoration: none;
+  background-color: $button-color;
+  color: white;
+  padding: 7px 20px;
+  margin: 10px auto;
+  border: none;
+  cursor: pointer;
+  width: 100px;
+  border-radius: 5px;
+  border-bottom: 3px solid $secondary-button-color
+}
+
+.login input[type=text], input[type=password] {
+  width: 70%;
+  padding: 12px;
+  margin: 3px auto;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  border-radius: 3px;
+}
+
+.login input[type=password] {
+  margin-bottom: 10px;
+}
+
+.btn a {
+  text-decoration: none;
+  background-color: $button-color;
+  color: white;
+  padding: 10px 20px;
+  margin: 10px auto;
+  border: none;
+  cursor: pointer;
+  width: 70%;
+  border-radius: 5px;
+  border-bottom: 3px solid $secondary-button-color
+}

@@ -4,17 +4,14 @@
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+    ViewData["Title"] = "Work Zone";
 }
 
-<script>
-    //function getIDs() {
-    //    var el = document.getElementsByName("ids").val();
-    //    document.getElementById("label").innerHTML = "sadyagsd";
-    //}
-    //$(document).ready(function () {
-    //}
-    //         )
+<h2 style="visibility: hidden;">sdf</h2>
 
+<h2 style="margin-left: 310px; margin-top: 30px;">@ViewData["Title"].</h2>
+
+<script>
     function getIDs() {
         ids = "";
         el = document.getElementsByClassName("ids");
@@ -27,67 +24,93 @@
     }
 </script>
 
+<div class="doc-background">
+
     @foreach (var doc in Model)
     {
-        <li>@doc.FileName   -    @doc.Status.Stat    -   @doc.Status.VersionType </li>
-        <form method="post">
-            
-            <input type="hidden" name="id" value="@doc.ID" />
+        <div class="wrapper document-item">
+            <label class="labels" style="margin-top: 10px">
+                @doc.FileName - @doc.Status.Stat - v.@doc.Status.VersionType
+            </label>
+            <form method="post" style="margin-top: -50px; margin-left: 300px;">
 
-            
-            @if (@doc.Status.Stat.ToString() == "FINAL")
-            {
-                <label>
-                    Add to flux<input type="checkbox" class ="ids" value="@doc.ID" />
-                </label>
-            }
-            <button asp-action="Preview" asp-controller="WorkZone">Preview</button>
+                <input type="hidden" name="id" value="@doc.ID" />
 
-            @if (@doc.Status.Stat.ToString() == "DRAFT")
-            {
-                <button asp-action="SetToDraft" asp-controller="WorkZone">Set to draft</button>
-            }
-            else if (@doc.Status.Stat.ToString() == "FINAL")
-            {
-                <button asp-action="ChangeFileToFinal" asp-controller="WorkZone">Set to final</button>
-            }
-            <button asp-action="DeleteFile" asp-controller="WorkZone">Delete file</button>
 
-        </form>
+                @if (@doc.Status.Stat.ToString() == "FINAL")
+                    {
+                        <label style="margin-left: 0px; margin-right: 50px;">
+                            Add to flux <input type="checkbox" class="ids" value="@doc.ID" />
+                        </label>
+                    }
+                <button asp-action="Preview" asp-controller="WorkZone">Preview</button>
+
+                @if (@doc.Status.Stat.ToString() == "DRAFT")
+                {
+                    <button asp-action="ChangeFileToFinal" asp-controller="WorkZone">Set to final</button>
+
+                }
+                else if (@doc.Status.Stat.ToString() == "FINAL")
+                {
+                    <button asp-action="SetToDraft" asp-controller="WorkZone">Set to draft</button>
+
+                }
+                <button asp-action="DeleteFile" asp-controller="WorkZone">Delete file</button>
+
+            </form>
+            <div class="line"></div>
+        </div>
 
     }
 
 
-<form method="post">
-    <textarea id="label" name="listIds" hidden></textarea>
-    
-    <button asp-action="StartFlux" asp-controller="WorkZone" onclick="getIDs()">Start flux</button>
-</form>
+    <form method="post" class="wrapper">
+        <textarea id="label" name="listIds" hidden></textarea>
 
-<form method="post" asp-action="AddFile" asp-controller="WorkZone" enctype="multipart/form-data">
+        <button asp-action="StartFlux" asp-controller="WorkZone" onclick="getIDs()">Start flux</button>
+    </form>
 
-    <input type="file" name="files" multiple />
-    <label>Other</label>
-    <textarea name="abs"></textarea>
-    <label>Keywords</label>
-    <textarea name="key"></textarea>
-    <div>
-        <input type="submit" value="Upload" />
-    </div>
-</form>
+    <form method="post" asp-action="AddFile" asp-controller="WorkZone" enctype="multipart/form-data">
+        <div class="wrapper2">
+            <div class="upload-section">
+                <input type="file" name="files" multiple />
 
-@*@Model.Capacity
-@Html.React("Work", new
-{
-    intitialData = @Model,
-    name = @Model.Capacity,
-    url = Url.Action("Work"),
-    submitUrl = Url.Action("AddFile"),
-    pollInterval = 2000,
-})*@
+                <label class="custom-file-upload" style="margin-top: -20px; margin-left: 200px;">
+                    <input type="file" name="files" multiple />
+                    Input File
+                </label>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.2/react.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.2/react-dom.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/remarkable/1.7.1/remarkable.min.js"></script>
-    <script src="@Url.Content("~/js/WorkPage.jsx")"></script>
- @Html.ReactInitJavaScript()
+                <label class="custom-file-upload" style="margin-top: -20px;">
+                    <input type="submit" />
+                    Upload File
+                </label>
+
+                <br />
+
+                <textarea name="key" placeholder="Insert some keywords" style="margin-left: 100px;"></textarea>
+                <textarea name="abs" placeholder="Other information about file"></textarea>
+            </div>
+        </div>
+    </form>
+
+</div>
+
+
+
+            @*@Model.Capacity
+                @Html.React("Work", new
+                {
+                    intitialData = @Model,
+                    name = @Model.Capacity,
+                    url = Url.Action("Work"),
+                    submitUrl = Url.Action("AddFile"),
+                    pollInterval = 2000,
+                })*@
+
+            <link href="~/css/styles.css" rel="stylesheet" />
+            <link href="~/css/sites.css" rel="stylesheet" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.2/react.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.2/react-dom.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/remarkable/1.7.1/remarkable.min.js"></script>
+            @*<script src="@url.content("~/js/workpage.jsx")"></script>*@
+            @Html.ReactInitJavaScript()

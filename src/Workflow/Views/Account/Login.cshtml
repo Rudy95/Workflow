@@ -5,8 +5,9 @@
 @{
     ViewData["Title"] = "Log in";
 }
+<h2 style="visibility: hidden;">sdf</h2>
 
-<h2>@ViewData["Title"].</h2>
+@*<h2>@ViewData["Title"].</h2>*@
 
     <div>
 
@@ -16,41 +17,33 @@
            url = Url.Action("Login"),
        })*@
 
-        <div className="wrapper">
-                <div className="login">
-                    <div className="flex-box">
+        <div class="wrapper-login">
+                <div class="login">
                         @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                         {
-                        <div className="logo">
+                        <div class="container">
                             <img src="http://i.imgur.com/6FHIXpn.png" />
                         </div>
 
-                        <div>User Login</div>
-
-                        <div className="container">
-                            <div>
-                                @Html.LabelFor(e => e.Email)
-                            </div>
+                        <div class="container">
                             <div>
                                 @Html.TextBoxFor(e => e.Email, new { @placeholder = "Email" })
-                            </div>
-                            <div>
-                                @Html.LabelFor(e => e.Password)
                             </div>
                             <div>
                                 @Html.PasswordFor(e => e.Password, new { @placeholder = "Password" })
                             </div>
                         </div>
 
-                        <div className="container">
-                            <button type="submit" className="button" value="Post"> LOGIN</button>
+                        <div class="container">
+                            <button type="submit" value="Post"> LOG IN</button>
                         </div>
                         }
                     </div>
-                </div>
             </div>
 
         <div>
+            <link href="~/css/styles.css" rel="stylesheet" />
+            <link href="~/css/site.css" rel="stylesheet" />
             @*<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.2/react.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.2/react-dom.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/remarkable/1.7.1/remarkable.min.js"></script>
